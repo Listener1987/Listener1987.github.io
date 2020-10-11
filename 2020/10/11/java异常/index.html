@@ -9,7 +9,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-     
+    java异常 |  
   </title>
   <meta name="generator" content="hexo-theme-ayer">
   
@@ -44,24 +44,33 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-java基本数据"
+  id="post-java异常"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
   data-scroll-reveal
 >
   <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  java异常
+</h1>
+ 
+
+    </header>
      
     <div class="article-meta">
-      <a href="/2020/09/12/java%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE/" class="article-date">
-  <time datetime="2020-09-12T11:53:06.480Z" itemprop="datePublished">2020-09-12</time>
+      <a href="/2020/10/11/java%E5%BC%82%E5%B8%B8/" class="article-date">
+  <time datetime="2020-10-11T07:24:46.000Z" itemprop="datePublished">2020-10-11</time>
 </a>   
 <div class="word_count">
     <span class="post-time">
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">180</span>
+            <span class="post-count">945</span>
         </span>
     </span>
 
@@ -70,7 +79,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">1 min</span>
+            <span class="post-count">3 min</span>
         </span>
     </span>
 </div>
@@ -85,13 +94,81 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <h2 id="java关键字"><a href="#java关键字" class="headerlink" title="java关键字"></a>java关键字</h2><p><img src="/2020/09/12/java%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE/%E5%85%B3%E9%94%AE%E5%AD%971.jpg"><br><img src="/2020/09/12/java%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE/%E5%85%B3%E9%94%AE%E5%AD%972.jpg">  </p>
-<h2 id="变量类型和数据类型"><a href="#变量类型和数据类型" class="headerlink" title="变量类型和数据类型"></a>变量类型和数据类型</h2><p><img src="/2020/09/12/java%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B.jpg"><br><img src="/2020/09/12/java%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE/%E5%8F%98%E9%87%8F%E7%B1%BB%E5%9E%8B.jpg"></p>
-<h2 id="基本的命名规则"><a href="#基本的命名规则" class="headerlink" title="基本的命名规则"></a>基本的命名规则</h2><p><img src="/2020/09/12/java%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE/%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99.jpg">  </p>
-<h2 id="java中的数据运算"><a href="#java中的数据运算" class="headerlink" title="java中的数据运算"></a>java中的数据运算</h2><p>自动类型提升：<br>    当容量小的数据类型变量与容量大的数据类型变量做运算时，结果自动提升为容量大的数据类型。<br>    byte、char、short –&gt;int –&gt; long –&gt; float –&gt; double<br>    注意：当byte、char、short三种类型运算时，结果为int型  </p>
-<p>强制类型转换：<br>    将容量大的数据类型强制转化为容量小的数据类型<br>    注意：强制类型转换，可能导致精度损失<br>    <img src="/2020/09/12/java%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE/%E5%BC%BA%E5%88%B6%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2.jpg"></p>
-<h2 id="String易错点："><a href="#String易错点：" class="headerlink" title="String易错点："></a>String易错点：</h2><pre><code>在运算中未碰到字符串时，做加法运算，一旦遇到字符串，变为字符连接</code></pre>
-<p><img src="/2020/09/12/java%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE/String%E6%98%93%E9%94%99%E7%94%A8%E6%B3%95.jpg">  </p>
+  <p>目录:</p>
+<ul>
+<li>java异常类型</li>
+<li>java异常处理机制</li>
+<li>处理机制一try-catch-finally</li>
+<li>处理机制二throws</li>
+<li>生成异常对象throw</li>
+<li>总结<a id="more"></a>
+<h2 id="java异常类型"><a href="#java异常类型" class="headerlink" title="java异常类型"></a>java异常类型</h2><blockquote>
+<p>Error<br>  java虚拟机无法解决的严重问题，JVM系统内部错误，资源耗尽等</p>
+</blockquote>
+</li>
+</ul>
+<blockquote>
+<p>Exception<br>    因编程错误或偶然因素导致的问题，可修改代码进行处理,空指针访问，读取不存在文件，数组越界等</p>
+<blockquote>
+<p>编译时异常(checked)</p>
+</blockquote>
+</blockquote>
+<ul>
+<li>IOException</li>
+<li>FileNotFoundException</li>
+<li>ClassNotFoundException<blockquote>
+<blockquote>
+<p>运行时异常(unchecked)</p>
+</blockquote>
+</blockquote>
+</li>
+<li>NullPointerException空指针</li>
+<li>ArrayIndexOutOfBoundsERxception数组越界</li>
+<li>ClassCastException类型转换异常</li>
+<li>NumberFormatException数字格式异常</li>
+<li>InputMismatchException输入不匹配</li>
+<li>ArithmeticException算数异常</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">      <span class="comment">//NullPointerException空指针异常</span></span><br><span class="line">      String str=<span class="keyword">null</span>;</span><br><span class="line">      System.out.println(str.charAt(<span class="number">0</span>));</span><br><span class="line"></span><br><span class="line">      <span class="comment">//ArrayIndexOutOfBoundsException数组越界</span></span><br><span class="line">      <span class="keyword">int</span>[] arr=<span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">10</span>];</span><br><span class="line">      System.out.println(arr[<span class="number">10</span>]);</span><br><span class="line"></span><br><span class="line">      <span class="comment">//ClassCastException类型转换异常</span></span><br><span class="line">      Object obj=<span class="keyword">new</span> Date();</span><br><span class="line">      String st=(String)obj;</span><br><span class="line"></span><br><span class="line">      <span class="comment">//NumberFormatException数字格式异常</span></span><br><span class="line">      String s=<span class="string">&quot;asd&quot;</span>;</span><br><span class="line">      <span class="keyword">int</span> num=Integer.parseInt(s);<span class="comment">//转换成数字失败</span></span><br><span class="line"></span><br><span class="line">      <span class="comment">//InputMismatchException输入不匹配</span></span><br><span class="line">      Scanner scan=<span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">      <span class="comment">//键盘输入&quot;abc&quot;而非数字时异常</span></span><br><span class="line">      <span class="keyword">int</span> score=scan.nextInt();</span><br><span class="line">      System.out.println(score);</span><br><span class="line"></span><br><span class="line">      <span class="comment">//ArithmeticException算数异常</span></span><br><span class="line">      <span class="keyword">int</span> a=<span class="number">2</span>,b=<span class="number">0</span>;<span class="comment">//分母不能为0</span></span><br><span class="line">      System.out.println(a/b);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<h2 id="java异常处理机制"><a href="#java异常处理机制" class="headerlink" title="java异常处理机制"></a>java异常处理机制</h2><pre><code>异常的处理：抓抛模型</code></pre>
+<blockquote>
+<p>过程一:抛，一旦出现异常，就会在异常代码处生成一个对应异常类的对象<br>         并将此对象抛出，其后的代码也不再执行  </p>
+</blockquote>
+<blockquote>
+<p>过程二:抓,异常处理的方式。<br>    * try-catch-finally<br>    * throws</p>
+</blockquote>
+<p>###try-catch-finally<br>说明</p>
+<ul>
+<li><p>catch的异常类型如果有子父类关系，则子类在上，否则无所谓</p>
+</li>
+<li><p>常用的异常对象处理的方式 String getMessage()或printStackTrace()</p>
+</li>
+<li><p>try结构声明的变量，不能在外部调用</p>
+</li>
+<li><p>finally是可选的</p>
+</li>
+<li><p>finally使用的情景，当出现catch中异常，或try，catch中有return语句时依然可以调用</p>
+</li>
+<li><p>finally使用的意义，数据库连接，输入输出流，网络编程中有些资源需要人为回收，当代码出现问题时，可在finally中声明资源关闭语句</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line">    <span class="comment">//可能出现异常的代码</span></span><br><span class="line">&#125;<span class="keyword">catch</span>(异常类型<span class="number">1</span> 对象<span class="number">1</span>)&#123;</span><br><span class="line">    <span class="comment">//处理异常的方式1</span></span><br><span class="line">&#125;<span class="keyword">catch</span>(异常类型<span class="number">2</span> 对象<span class="number">2</span>)&#123;</span><br><span class="line">    <span class="comment">//处理异常的方式2</span></span><br><span class="line">&#125;</span><br><span class="line">...</span><br><span class="line"><span class="keyword">finally</span>&#123;</span><br><span class="line">    <span class="comment">//一定会执行的代码</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//try-catch-finally处理</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;<span class="comment">//可能出错的语句</span></span><br><span class="line">            String str = <span class="string">&quot;abc&quot;</span>;</span><br><span class="line">            <span class="keyword">int</span> num = Integer.parseInt(str);</span><br><span class="line">        &#125;<span class="keyword">catch</span>(NumberFormatException e)&#123;<span class="comment">//捕捉异常，并做出处理</span></span><br><span class="line">            System.out.println(e.getMessage());</span><br><span class="line">        &#125;<span class="keyword">catch</span>(ClassCastException e)&#123;</span><br><span class="line">            <span class="comment">//系统只执行第一个满足条件的catch语句</span></span><br><span class="line">            <span class="comment">//第一个catch已经执行，则第二个不会执行，同时第二个也不满足错误条件</span></span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;<span class="keyword">finally</span> &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;finally语句一定执行&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="throws-异常类型"><a href="#throws-异常类型" class="headerlink" title="throws+异常类型"></a>throws+异常类型</h3></li>
+<li><p>并没有真正的处理异常，而是把异常交给调用者使用try-catch处理</p>
+</li>
+<li><p>throws使用的方向，几个方法层层递进，每个方法都有可能出错，则使用throws效果更好</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">try</span> &#123;</span><br><span class="line">           kk();</span><br><span class="line">       &#125; <span class="keyword">catch</span> (NumberFormatException e) &#123;</span><br><span class="line">           e.getStackTrace();</span><br><span class="line">       &#125; <span class="keyword">catch</span> (ClassCastException e) &#123;</span><br><span class="line">           e.getStackTrace();</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="comment">//抛出错误给上级处理</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">kk</span><span class="params">()</span> <span class="keyword">throws</span> NumberFormatException, ClassCastException </span>&#123;</span><br><span class="line">       <span class="comment">//可能出错的语句</span></span><br><span class="line">       String str = <span class="string">&quot;abc&quot;</span>;</span><br><span class="line">       <span class="keyword">int</span> num = Integer.parseInt(str);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="throw"><a href="#throw" class="headerlink" title="throw"></a>throw</h3></li>
+<li><p>throw可手动生成异常对象</p>
+</li>
+<li><p>用户可自定义异常类型</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">f1</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> NumberFormatException(<span class="string">&quot;当前数据不是数字&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">f2</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="comment">//需要定义类myException继承现有的异常类型</span></span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> myException(<span class="string">&quot;当前数据不是数字&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>###总结：  </p>
+<ul>
+<li>子类重写的方法抛出的异常类型不大于父类被重写的方法抛出的异常类型</li>
+<li>若父类被重写的方法没有使用throws则不能用throws，只能用try-catch</li>
+</ul>
  
       <!-- reward -->
       
@@ -162,7 +239,7 @@
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://yoursite.com/2020/09/12/java%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://yoursite.com/2020/10/11/java%E5%BC%82%E5%B8%B8/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -173,19 +250,10 @@
    
   <nav class="article-nav">
     
+    
       <a href="/2020/09/14/java%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/" class="article-nav-link">
-        <strong class="article-nav-caption">上一篇</strong>
-        <div class="article-nav-title">
-          
-            java基本语法
-          
-        </div>
-      </a>
-    
-    
-      <a href="/2020/08/07/Markdown%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">Markdown基本操作</div>
+        <div class="article-nav-title">java基本语法</div>
       </a>
     
   </nav>

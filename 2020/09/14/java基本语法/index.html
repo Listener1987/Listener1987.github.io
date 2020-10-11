@@ -70,7 +70,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">342</span>
+            <span class="post-count">377</span>
         </span>
     </span>
 
@@ -94,7 +94,15 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <h2 id="Scanner类"><a href="#Scanner类" class="headerlink" title="Scanner类"></a>Scanner类</h2><p>获取不同类型的变量<br>    1.导包 import java.util.Scanner;<br>    2.scanner的实例化 Scanner scanner=new Scanner(System.in);<br>    3.调用类的相关方法，获取指定类型的变量</p>
+  <p>目录:</p>
+<ul>
+<li>Scanner类</li>
+<li>数组</li>
+<li>数组的内存结构解析</li>
+<li>测算代码运行时间的简单方法</li>
+<li>continue和break的标签使用<a id="more"></a>
+<h2 id="Scanner类"><a href="#Scanner类" class="headerlink" title="Scanner类"></a>Scanner类</h2>获取不同类型的变量<br>  1.导包 import java.util.Scanner;<br>  2.scanner的实例化 Scanner scanner=new Scanner(System.in);<br>  3.调用类的相关方法，获取指定类型的变量</li>
+</ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">package com.scanner;</span><br><span class="line">&#x2F;&#x2F;导入包</span><br><span class="line">import java.util.Scanner;</span><br><span class="line"></span><br><span class="line">public class AboutScanner &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        &#x2F;&#x2F;Scanner的实例化</span><br><span class="line">        Scanner scanner &#x3D;new Scanner(System.in);</span><br><span class="line">        &#x2F;&#x2F;调用</span><br><span class="line">        System.out.println(&quot;请输入姓名&quot;);</span><br><span class="line">        String name&#x3D;scanner.next();&#x2F;&#x2F;获取文本内容</span><br><span class="line">        System.out.println(&quot;请输入年龄&quot;);</span><br><span class="line">        int age &#x3D;scanner.nextInt();&#x2F;&#x2F;获取一个整数</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>##数组<br>    1.数组对象在内存中是一整块连续的空间<br>    2.数组的胀肚一旦确定，就不能更改</p>
@@ -183,10 +191,19 @@
    
   <nav class="article-nav">
     
+      <a href="/2020/10/11/java%E5%BC%82%E5%B8%B8/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            java异常
+          
+        </div>
+      </a>
     
-      <a href="/2020/09/12/java%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE/" class="article-nav-link">
+    
+      <a href="/2020/09/01/java%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title"></div>
+        <div class="article-nav-title">java基本数据</div>
       </a>
     
   </nav>
