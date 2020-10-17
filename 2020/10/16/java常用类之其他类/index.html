@@ -70,7 +70,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">2.2k</span>
+            <span class="post-count">2.3k</span>
         </span>
     </span>
 
@@ -79,7 +79,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">10 min</span>
+            <span class="post-count">11 min</span>
         </span>
     </span>
 </div>
@@ -94,7 +94,26 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <h2 id="jdk-8之前的日期时间的API测试"><a href="#jdk-8之前的日期时间的API测试" class="headerlink" title="jdk 8之前的日期时间的API测试"></a>jdk 8之前的日期时间的API测试</h2><p>1.System类中的currentTimeMillis()</p>
+  <p>目录：</p>
+<ul>
+<li>jdk 8之前的日期时间的API测试</li>
+<li>System类中的currentTimeMillis()</li>
+<li>java.util.Data类(日期类)</li>
+<li>java.sql.Date类</li>
+<li>SimpleDateFormat</li>
+<li>Calendar日历类（抽象类）</li>
+<li>jdk 8的日期时间的API测试</li>
+<li>LocalDate、LocalTime、LocalDateTime 的使用</li>
+<li>Instant的使用</li>
+<li>DateTimeFormatter:格式化或解析日期、时间</li>
+<li>Comparable接口与Comparator接口</li>
+<li>Comparable接口的使用举例：自然排序</li>
+<li>Comparator接口的使用：定制排序</li>
+<li>其他常用类的使用<a id="more"></a>
+
+</li>
+</ul>
+<h2 id="jdk-8之前的日期时间的API测试"><a href="#jdk-8之前的日期时间的API测试" class="headerlink" title="jdk 8之前的日期时间的API测试"></a>jdk 8之前的日期时间的API测试</h2><p>1.System类中的currentTimeMillis()</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test1</span><span class="params">()</span></span></span><br><span class="line"><span class="function">   </span>&#123;</span><br><span class="line">       <span class="comment">//System类中的currentTimeMillis()</span></span><br><span class="line">       <span class="keyword">long</span> time=System.currentTimeMillis();</span><br><span class="line">       <span class="comment">//返回当前时间与1970年1月1日0时0分0秒之间以毫秒为单位的时间差。(时间戳)</span></span><br><span class="line">       System.out.println(time);<span class="comment">//返回值为 1602838462492</span></span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
 
 <p>2.java.util.Data类(日期类)  </p>
@@ -125,7 +144,7 @@
 <p>2.Instant的使用<br>    * 类似于java.util.Date类</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test2</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//now():获取本初子午线对应的标准时间</span></span><br><span class="line">    Instant ins=Instant.now();</span><br><span class="line">    System.out.println(ins);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//添加时间的偏移量</span></span><br><span class="line">    OffsetDateTime off=ins.atOffset(ZoneOffset.ofHours(<span class="number">8</span>));</span><br><span class="line">    System.out.println(off);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//toEpochMilli():获取自1970年1月1日0时0分0秒（UTC）开始的毫秒数  ---&gt; Date类的getTime()</span></span><br><span class="line">    <span class="keyword">long</span> milli=ins.toEpochMilli();</span><br><span class="line">    System.out.println(milli);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//ofEpochMilli():通过给定的毫秒数，获取Instant实例  --&gt;Date(long millis)</span></span><br><span class="line">    Instant ins2=Instant.ofEpochMilli(<span class="number">1602928622531L</span>);</span><br><span class="line">    System.out.println(ins2);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>3.ateTimeFormatter:格式化或解析日期、时间<br>    * 类似于SimpleDateFormat</p>
+<p>3.DateTimeFormatter:格式化或解析日期、时间<br>    * 类似于SimpleDateFormat</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test3</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//方式一：预定义的标准格式。如：ISO_LOCAL_DATE_TIME;ISO_LOCAL_DATE;ISO_LOCAL_TIME</span></span><br><span class="line">    DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME;</span><br><span class="line">    <span class="comment">//格式化:日期--&gt;字符串</span></span><br><span class="line">    LocalDateTime localDateTime = LocalDateTime.now();</span><br><span class="line">    String str1 = formatter.format(localDateTime);</span><br><span class="line">    System.out.println(localDateTime);</span><br><span class="line">    System.out.println(str1);<span class="comment">//2019-02-18T15:42:18.797</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//解析：字符串 --&gt;日期</span></span><br><span class="line">    TemporalAccessor parse = formatter.parse(<span class="string">&quot;2019-02-18T15:42:18.797&quot;</span>);</span><br><span class="line">    System.out.println(parse);</span><br><span class="line"></span><br><span class="line"><span class="comment">//方式二：</span></span><br><span class="line"><span class="comment">//本地化相关的格式。如：ofLocalizedDateTime()</span></span><br><span class="line"><span class="comment">//FormatStyle.LONG / FormatStyle.MEDIUM / FormatStyle.SHORT :适用于LocalDateTime</span></span><br><span class="line">    DateTimeFormatter formatter1 = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.LONG);</span><br><span class="line">    <span class="comment">//格式化</span></span><br><span class="line">    String str2 = formatter1.format(localDateTime);</span><br><span class="line">    System.out.println(str2);<span class="comment">//2019年2月18日 下午03时47分16秒</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//      本地化相关的格式。如：ofLocalizedDate()</span></span><br><span class="line"><span class="comment">//      FormatStyle.FULL / FormatStyle.LONG / FormatStyle.MEDIUM / FormatStyle.SHORT : 适用于LocalDate</span></span><br><span class="line">    DateTimeFormatter formatter2 = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM);</span><br><span class="line">    <span class="comment">//格式化</span></span><br><span class="line">    String str3 = formatter2.format(LocalDate.now());</span><br><span class="line">    System.out.println(str3);<span class="comment">//2019-2-18</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">//重点： 方式三：自定义的格式。如：ofPattern(“yyyy-MM-dd hh:mm:ss”)</span></span><br><span class="line">    DateTimeFormatter formatter3 = DateTimeFormatter.ofPattern(<span class="string">&quot;yyyy-MM-dd hh:mm:ss&quot;</span>);</span><br><span class="line">    <span class="comment">//格式化</span></span><br><span class="line">    String str4 = formatter3.format(LocalDateTime.now());</span><br><span class="line">    System.out.println(str4);<span class="comment">//2019-02-18 03:52:09</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//解析</span></span><br><span class="line">    TemporalAccessor accessor = formatter3.parse(<span class="string">&quot;2019-02-18 03:52:09&quot;</span>);</span><br><span class="line">    System.out.println(accessor);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h2 id="Comparable接口与Comparator接口"><a href="#Comparable接口与Comparator接口" class="headerlink" title="Comparable接口与Comparator接口"></a>Comparable接口与Comparator接口</h2><pre><code>* 实现对多个对象进行排序，比较对象的大小
@@ -224,6 +243,15 @@
 
    
   <nav class="article-nav">
+    
+      <a href="/2020/10/17/java%E6%9E%9A%E4%B8%BE%E5%92%8C%E6%B3%A8%E9%87%8A/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            java枚举和注释
+          
+        </div>
+      </a>
     
     
       <a href="/2020/10/15/java%E5%B8%B8%E7%94%A8%E7%B1%BB%E4%B9%8BString%E7%B1%BB/" class="article-nav-link">
