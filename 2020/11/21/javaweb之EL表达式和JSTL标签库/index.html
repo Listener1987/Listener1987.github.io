@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+
+
+<html lang="en">
+
+
+<head>
+  <meta charset="utf-8" />
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    javaweb之EL表达式和JSTL标签库 |  
+  </title>
+  <meta name="generator" content="hexo-theme-ayer">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/dist/main.css">
+
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css">
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+  
+  
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+  
+  
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-javaweb之EL表达式和JSTL标签库"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  javaweb之EL表达式和JSTL标签库
+</h1>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2020/11/21/javaweb%E4%B9%8BEL%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%92%8CJSTL%E6%A0%87%E7%AD%BE%E5%BA%93/" class="article-date">
+  <time datetime="2020-11-21T05:44:07.000Z" itemprop="datePublished">2020-11-21</time>
+</a>   
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> Word count:</span>
+            <span class="post-count">3.3k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> Reading time≈</span>
+            <span class="post-count">16 min</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>目录：</p>
+<ul>
+<li>El表达式的基本概念</li>
+<li>El表达式的基本语法和隐含对象</li>
+<li>JSTL标签库的基本概念</li>
+<li>JSTL标签库的核心库<a id="more"></a>
+
+</li>
+</ul>
+<h2 id="El表达式"><a href="#El表达式" class="headerlink" title="El表达式"></a>El表达式</h2><ul>
+<li>EL 表达式的全称是：Expression Language。是表达式语言。</li>
+<li>EL 表达式主要是代替 jsp 页面中的表达式脚本在 jsp 页面中进行数据的输出。</li>
+<li>EL 表达式的格式是：${表达式}</li>
+<li>EL 表达式在输出 null 值的时候，输出的是空串。jsp 表达式脚本输出 null 值的时候，输出的是 null 字符串。</li>
+</ul>
+<h3 id="EL表达式搜索域数据的顺序"><a href="#EL表达式搜索域数据的顺序" class="headerlink" title="EL表达式搜索域数据的顺序"></a>EL表达式搜索域数据的顺序</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>el表达式搜索数据的顺序<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">%--</span>    当四个域中都有相同的 <span class="attr">key</span> 的数据的时候，<span class="attr">--</span>%&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">%--</span>    <span class="attr">EL</span> 表达式会按照四个域的从小到大的顺序去进行搜索，找到就输出。<span class="attr">--</span>%&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">%</span></span></span><br><span class="line"><span class="tag">    //前四个域中都保存了相同的<span class="attr">key</span>得到数据</span></span><br><span class="line"><span class="tag">    <span class="attr">pageContext.setAttribute</span>(&quot;<span class="attr">key</span>&quot;,&quot;<span class="attr">pageContext</span>&quot;);</span></span><br><span class="line"><span class="tag">    <span class="attr">request.setAttribute</span>(&quot;<span class="attr">key</span>&quot;,&quot;<span class="attr">request</span>&quot;);</span></span><br><span class="line"><span class="tag">    <span class="attr">session.setAttribute</span>(&quot;<span class="attr">key</span>&quot;,&quot;<span class="attr">session</span>&quot;);</span></span><br><span class="line"><span class="tag">    <span class="attr">application.setAttribute</span>(&quot;<span class="attr">key</span>&quot;,&quot;<span class="attr">application</span>&quot;);</span></span><br><span class="line"><span class="tag">%&gt;</span></span><br><span class="line">$&#123;key&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="El表达式输出普通、数组、List、map属性"><a href="#El表达式输出普通、数组、List、map属性" class="headerlink" title="El表达式输出普通、数组、List、map属性"></a>El表达式输出普通、数组、List、map属性</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> String[] phones;</span><br><span class="line">    <span class="keyword">private</span> List&lt;String&gt; cities;</span><br><span class="line">    <span class="keyword">private</span> Map&lt;String,Object&gt; map;&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">%</span></span></span><br><span class="line"><span class="tag">    <span class="attr">Person</span> <span class="attr">person</span>=<span class="string">new</span> <span class="attr">Person</span>();</span></span><br><span class="line"><span class="tag">    <span class="attr">person.setName</span>(&quot;哈哈哈&quot;);</span></span><br><span class="line"><span class="tag">    <span class="attr">person.setPhones</span>(<span class="attr">new</span> <span class="attr">String</span>[]&#123;&quot;<span class="attr">18845241542</span>&quot;,&quot;<span class="attr">17845547125</span>&quot;,&quot;<span class="attr">13645211789</span>&quot;&#125;);</span></span><br><span class="line"><span class="tag"></span></span><br><span class="line">    List&lt;String&gt; cities=new ArrayList&lt;String&gt;();</span><br><span class="line">    cities.add(&quot;北京&quot;);</span><br><span class="line">    cities.add(&quot;上海&quot;);</span><br><span class="line">    cities.add(&quot;深圳&quot;);</span><br><span class="line">    person.setCities(cities);</span><br><span class="line"></span><br><span class="line">    Map<span class="tag">&lt;<span class="name">String,Object</span>&gt;</span>map=new HashMap<span class="tag">&lt;&gt;</span>();</span><br><span class="line">    map.put(&quot;key1&quot;,&quot;value1&quot;);</span><br><span class="line">    map.put(&quot;key2&quot;,&quot;value2&quot;);</span><br><span class="line">    map.put(&quot;key3&quot;,&quot;value3&quot;);</span><br><span class="line">    person.setMap(map);</span><br><span class="line">    pageContext.setAttribute(&quot;p&quot;, person);</span><br><span class="line">%&gt;</span><br><span class="line">输出 Person：$&#123; p &#125;<span class="tag">&lt;<span class="name">br</span>/&gt;</span></span><br><span class="line">输出 Person 的 name 属性：$&#123;p.name&#125; <span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">输出 Person 的 pnones 数组属性值：$&#123;p.phones[2]&#125; <span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">输出 Person 的 cities 集合中的元素值：$&#123;p.cities&#125; <span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">输出 Person 的 List 集合中个别元素值：$&#123;p.cities[2]&#125; <span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">输出 Person 的 Map 集合: $&#123;p.map&#125; <span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">输出 Person 的 Map 集合中某个 key 的值: $&#123;p.map.key3&#125; <span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">%--输出</span> <span class="attr">Person</span>：<span class="attr">com.dxb.el.Person</span>@<span class="attr">72fb6fa7--</span>%&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">%--输出</span> <span class="attr">Person</span> 的 <span class="attr">name</span> 属性：哈哈哈<span class="attr">--</span>%&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">%--输出</span> <span class="attr">Person</span> 的 <span class="attr">pnones</span> 数组属性值：<span class="attr">13645211789--</span>%&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">%--输出</span> <span class="attr">Person</span> 的 <span class="attr">cities</span> 集合中的元素值：[北京, 上海, 深圳]<span class="attr">--</span>%&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">%--输出</span> <span class="attr">Person</span> 的 <span class="attr">List</span> 集合中个别元素值：深圳<span class="attr">--</span>%&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">%--输出</span> <span class="attr">Person</span> 的 <span class="attr">Map</span> 集合<span class="attr">:</span> &#123;<span class="attr">key1</span>=<span class="string">value1,</span> <span class="attr">key2</span>=<span class="string">value2,</span> <span class="attr">key3</span>=<span class="string">value3&#125;--%</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">%--输出</span> <span class="attr">Person</span> 的 <span class="attr">Map</span> 集合中某个 <span class="attr">key</span> 的值<span class="attr">:</span> <span class="attr">value3--</span>%&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="El表达式–运算"><a href="#El表达式–运算" class="headerlink" title="El表达式–运算"></a>El表达式–运算</h3><p><img src="/2020/11/21/javaweb%E4%B9%8BEL%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%92%8CJSTL%E6%A0%87%E7%AD%BE%E5%BA%93/11.jpg"><br><img src="/2020/11/21/javaweb%E4%B9%8BEL%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%92%8CJSTL%E6%A0%87%E7%AD%BE%E5%BA%93/22.jpg"><br><img src="/2020/11/21/javaweb%E4%B9%8BEL%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%92%8CJSTL%E6%A0%87%E7%AD%BE%E5%BA%93/33.jpg"><br><img src="/2020/11/21/javaweb%E4%B9%8BEL%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%92%8CJSTL%E6%A0%87%E7%AD%BE%E5%BA%93/44.jpg"></p>
+<h3 id="El表达式的11个隐含对象"><a href="#El表达式的11个隐含对象" class="headerlink" title="El表达式的11个隐含对象"></a>El表达式的11个隐含对象</h3><p>变量                类型                            作用<br>pageContext      PageContextImpl       它可以获取 jsp 中的九大内置对象<br>pageScope        Map&lt;String,Object&gt;    它可以获取 pageContext 域中的数据<br>requestScope     Map&lt;String,Object&gt;    它可以获取 Request 域中的数据<br>sessionScope     Map&lt;String,Object&gt;    它可以获取 Session 域中的数据<br>applicationScope Map&lt;String,Object&gt;    它可以获取 ServletContext 域中的数据<br>param            Map&lt;String,String&gt;    它可以获取请求参数的值<br>paramValues      Map&lt;String,String[]&gt;  它也可以获取请求参数的值，获取多个值的时候使用。<br>header           Map&lt;String,String&gt;    它可以获取请求头的信息<br>headerValues     Map&lt;String,String[]&gt;  它可以获取请求头的信息，它可以获取多个值的情况<br>cookie           Map&lt;String,Cookie&gt;    它可以获取当前请求的 Cookie 信息<br>initParam        Map&lt;String,String&gt;    它可以获取在 web.xml 中配置的<context-param>上下文参数 </context-param></p>
+<h4 id="EL获取四个特定域的属性"><a href="#EL获取四个特定域的属性" class="headerlink" title="EL获取四个特定域的属性"></a>EL获取四个特定域的属性</h4><p>pageScope ====== pageContext 域<br>requestScope ====== Request 域<br>sessionScope ====== Session 域<br>applicationScope ====== ServletContext 域</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;%</span><br><span class="line">    pageContext.setAttribute(<span class="string">&quot;key1&quot;</span>,<span class="string">&quot;pageContext1&quot;</span>);</span><br><span class="line">    pageContext.setAttribute(<span class="string">&quot;key1&quot;</span>,<span class="string">&quot;pageContext2&quot;</span>);</span><br><span class="line">    request.setAttribute(<span class="string">&quot;key2&quot;</span>,<span class="string">&quot;request&quot;</span>);</span><br><span class="line">    session.setAttribute(<span class="string">&quot;key2&quot;</span>,<span class="string">&quot;session&quot;</span>);</span><br><span class="line">    application.setAttribute(<span class="string">&quot;key2&quot;</span>,<span class="string">&quot;application&quot;</span>);</span><br><span class="line">%&gt;</span><br><span class="line">$&#123;applicationScope.key2&#125;</span><br><span class="line">$&#123;pageScope.key1&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="pageContext对象的使用"><a href="#pageContext对象的使用" class="headerlink" title="pageContext对象的使用"></a>pageContext对象的使用</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">%--</span></span></span><br><span class="line"><span class="tag"><span class="attr">request.getScheme</span>() 它可以获取请求的协议</span></span><br><span class="line"><span class="tag"><span class="attr">request.getServerName</span>() 获取请求的服务器 <span class="attr">ip</span> 或域名</span></span><br><span class="line"><span class="tag"><span class="attr">request.getServerPort</span>() 获取请求的服务器端口号</span></span><br><span class="line"><span class="tag"><span class="attr">getContextPath</span>() 获取当前工程路径</span></span><br><span class="line"><span class="tag"><span class="attr">request.getMethod</span>() 获取请求的方式（<span class="attr">GET</span> 或 <span class="attr">POST</span>）</span></span><br><span class="line"><span class="tag"><span class="attr">request.getRemoteHost</span>() 获取客户端的 <span class="attr">ip</span> 地址</span></span><br><span class="line"><span class="tag"><span class="attr">session.getId</span>() 获取会话的唯一标识</span></span><br><span class="line"><span class="tag"><span class="attr">--</span>%&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">%</span></span></span><br><span class="line"><span class="tag"><span class="attr">pageContext.setAttribute</span>(&quot;<span class="attr">req</span>&quot;, <span class="attr">request</span>);</span></span><br><span class="line"><span class="tag">%&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">%=request.getScheme()</span> %&gt;</span> <span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">1.协议： $&#123; req.scheme &#125;<span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">2.服务器 ip：$&#123; pageContext.request.serverName &#125;<span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">3.服务器端口：$&#123; pageContext.request.serverPort &#125;<span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">4.获取工程路径：$&#123; pageContext.request.contextPath &#125;<span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">5.获取请求方法：$&#123; pageContext.request.method &#125;<span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">6.获取客户端 ip 地址：$&#123; pageContext.request.remoteHost &#125;<span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">7.获取会话的 id 编号：$&#123; pageContext.session.id &#125;<span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">%--http--%</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">%--1.协议：</span> <span class="attr">http--</span>%&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">%--2.服务器</span> <span class="attr">ip</span>：<span class="attr">localhost--</span>%&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">%--3.服务器端口：8080--%</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">%--4.获取工程路径：</span>/<span class="attr">Day6--</span>%&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">%--5.获取请求方法：GET--%</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">%--6.获取客户端</span> <span class="attr">ip</span> 地址：<span class="attr">0:0:0:0:0:0:0:1--</span>%&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">%--7.获取会话的</span> <span class="attr">id</span> 编号：<span class="attr">B788F7863CF9DB7CCC163CABDB2EF6B7--</span>%&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="EL-表达式其他隐含对象的使用"><a href="#EL-表达式其他隐含对象的使用" class="headerlink" title="EL 表达式其他隐含对象的使用"></a>EL 表达式其他隐含对象的使用</h4><p>param          Map&lt;String,String&gt;      它可以获取请求参数的值<br>paramValues    Map&lt;String,String[]&gt;    它也可以获取请求参数的值，获取多个值的时候使用。<br>header         Map&lt;String,String&gt;      它可以获取请求头的信息<br>headerValues   Map&lt;String,String[]&gt;    它可以获取请求头的信息，它可以获取多个值的情况<br>cookie         Map&lt;String,Cookie&gt;      它可以获取当前请求的 Cookie 信息<br>initParam      Map&lt;String,String&gt;      它可以获取在 web.xml 中配置的<context-param>上下文参数</context-param></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">输出请求参数 username 的值：$&#123; param.username &#125; &lt;br&gt;</span><br><span class="line">输出请求参数 password 的值：$&#123; param.password &#125; &lt;br&gt;</span><br><span class="line">输出请求参数 username 的值：$&#123; paramValues.username[<span class="number">0</span>] &#125; &lt;br&gt;</span><br><span class="line">输出请求参数 hobby 的值：$&#123; paramValues.hobby[<span class="number">0</span>] &#125; &lt;br&gt;</span><br><span class="line">输出请求参数 hobby 的值：$&#123; paramValues.hobby[<span class="number">1</span>] &#125; &lt;br&gt;</span><br><span class="line">输出请求头【User-Agent】的值：$&#123; header[<span class="string">&#x27;User-Agent&#x27;</span>] &#125; &lt;br&gt;</span><br><span class="line">输出请求头【Connection】的值：$&#123; header.Connection &#125; &lt;br&gt;</span><br><span class="line">输出请求头【User-Agent】的值：$&#123; headerValues[<span class="string">&#x27;User-Agent&#x27;</span>][<span class="number">0</span>] &#125; &lt;br&gt;</span><br><span class="line">获取 Cookie 的名称：$&#123; cookie.JSESSIONID.name &#125; &lt;br&gt;</span><br><span class="line">获取 Cookie 的值：$&#123; cookie.JSESSIONID.value &#125; &lt;br&gt;</span><br><span class="line">输出&amp;lt;Context-param&amp;gt;username 的值：$&#123; initParam.username &#125; &lt;br&gt;</span><br><span class="line">输出&amp;lt;Context-param&amp;gt;url 的值：$&#123; initParam.url &#125; &lt;br&gt;</span><br><span class="line">&lt;/body&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="JSTL标签库"><a href="#JSTL标签库" class="headerlink" title="JSTL标签库"></a>JSTL标签库</h2><ul>
+<li>全称是指 JSP Standard Tag Library标准标签库。不断完善的的JSP标签库。</li>
+<li>EL 表达式主要是为了替换jsp中的表达式脚本，而标签库则是为了替换代码脚本。<br><img src="/2020/11/21/javaweb%E4%B9%8BEL%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%92%8CJSTL%E6%A0%87%E7%AD%BE%E5%BA%93/55.jpg"></li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">在 jsp 标签库中使用 taglib 指令引入标签库(依赖第三方包)</span><br><span class="line">CORE 标签库</span><br><span class="line"><span class="tag">&lt;<span class="name">%@</span> <span class="attr">taglib</span> <span class="attr">prefix</span>=<span class="string">&quot;c&quot;</span> <span class="attr">uri</span>=<span class="string">&quot;http://java.sun.com/jsp/jstl/core&quot;</span> %&gt;</span></span><br><span class="line">XML 标签库</span><br><span class="line"><span class="tag">&lt;<span class="name">%@</span> <span class="attr">taglib</span> <span class="attr">prefix</span>=<span class="string">&quot;x&quot;</span> <span class="attr">uri</span>=<span class="string">&quot;http://java.sun.com/jsp/jstl/xml&quot;</span> %&gt;</span></span><br><span class="line">FMT 标签库</span><br><span class="line"><span class="tag">&lt;<span class="name">%@</span> <span class="attr">taglib</span> <span class="attr">prefix</span>=<span class="string">&quot;fmt&quot;</span> <span class="attr">uri</span>=<span class="string">&quot;http://java.sun.com/jsp/jstl/fmt&quot;</span> %&gt;</span></span><br><span class="line">SQL 标签库</span><br><span class="line"><span class="tag">&lt;<span class="name">%@</span> <span class="attr">taglib</span> <span class="attr">prefix</span>=<span class="string">&quot;sql&quot;</span> <span class="attr">uri</span>=<span class="string">&quot;http://java.sun.com/jsp/jstl/sql&quot;</span> %&gt;</span></span><br><span class="line">FUNCTIONS 标签库</span><br><span class="line"><span class="tag">&lt;<span class="name">%@</span> <span class="attr">taglib</span> <span class="attr">prefix</span>=<span class="string">&quot;fn&quot;</span> <span class="attr">uri</span>=<span class="string">&quot;http://java.sun.com/jsp/jstl/functions&quot;</span> %&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="core核心库使用"><a href="#core核心库使用" class="headerlink" title="core核心库使用"></a>core核心库使用</h3><p>1.&lt;c:set /&gt; 作用：set 标签可以往域中保存数据<br>2.&lt;c:if /&gt; 作用:if标签用来做 if 判断。<br>3.&lt;c:choose&gt;&lt;c:when&gt;&lt;c:otherwise&gt;标签 作用：多路判断。跟 switch … case …. default 非常接近<br>4.&lt;c:forEach/&gt; 作用：遍历输出使用。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.dxb.el;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Student</span> </span>&#123;</span><br><span class="line">    <span class="comment">//4.编号，用户名，密码，年龄，电话信息</span></span><br><span class="line">    <span class="keyword">private</span> Integer id;</span><br><span class="line">    <span class="keyword">private</span> String username;</span><br><span class="line">    <span class="keyword">private</span> String password;</span><br><span class="line">    <span class="keyword">private</span> Integer age;</span><br><span class="line">    <span class="keyword">private</span> String phone;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Student</span><span class="params">(Integer id, String username, String password, Integer age, String phone)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.id = id;</span><br><span class="line">        <span class="keyword">this</span>.username = username;</span><br><span class="line">        <span class="keyword">this</span>.password = password;</span><br><span class="line">        <span class="keyword">this</span>.age = age;</span><br><span class="line">        <span class="keyword">this</span>.phone = phone;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Student</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Integer <span class="title">getId</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setId</span><span class="params">(Integer id)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.id = id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getUsername</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> username;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setUsername</span><span class="params">(String username)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.username = username;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getPassword</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> password;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setPassword</span><span class="params">(String password)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.password = password;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Integer <span class="title">getAge</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAge</span><span class="params">(Integer age)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getPhone</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> phone;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setPhone</span><span class="params">(String phone)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.phone = phone;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;Student&#123;&quot;</span> +</span><br><span class="line">                <span class="string">&quot;id=&quot;</span> + id +</span><br><span class="line">                <span class="string">&quot;, username=&#x27;&quot;</span> + username + <span class="string">&#x27;\&#x27;&#x27;</span> +</span><br><span class="line">                <span class="string">&quot;, password=&#x27;&quot;</span> + password + <span class="string">&#x27;\&#x27;&#x27;</span> +</span><br><span class="line">                <span class="string">&quot;, age=&quot;</span> + age +</span><br><span class="line">                <span class="string">&quot;, phone=&#x27;&quot;</span> + phone + <span class="string">&#x27;\&#x27;&#x27;</span> +</span><br><span class="line">                <span class="string">&#x27;&#125;&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">%@</span> <span class="attr">page</span> <span class="attr">import</span>=<span class="string">&quot;java.util.HashMap&quot;</span> %&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">%@</span> <span class="attr">page</span> <span class="attr">import</span>=<span class="string">&quot;java.util.Map&quot;</span> %&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">%@</span> <span class="attr">page</span> <span class="attr">import</span>=<span class="string">&quot;com.dxb.el.Student&quot;</span> %&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">%@</span> <span class="attr">page</span> <span class="attr">import</span>=<span class="string">&quot;java.util.List&quot;</span> %&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">%@</span> <span class="attr">page</span> <span class="attr">import</span>=<span class="string">&quot;java.util.ArrayList&quot;</span> %&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">%@</span> <span class="attr">taglib</span> <span class="attr">prefix</span>=<span class="string">&quot;c&quot;</span> <span class="attr">uri</span>=<span class="string">&quot;http://java.sun.com/jsp/jstl/core&quot;</span> %&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">%@</span> <span class="attr">page</span> <span class="attr">contentType</span>=<span class="string">&quot;text/html;charset=UTF-8&quot;</span> <span class="attr">language</span>=<span class="string">&quot;java&quot;</span> %&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>core核心库的使用<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">&lt;%--&lt;c:set/&gt;--%&gt;</span><br><span class="line"><span class="tag">&lt;<span class="name">%--set标签可以往域中保存数据--%</span>&gt;</span></span><br><span class="line">保存之前:$&#123;sessionScope.abc&#125;<span class="tag">&lt;<span class="name">br</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">c:set</span> <span class="attr">scope</span>=<span class="string">&quot;session&quot;</span> <span class="attr">var</span>=<span class="string">&quot;abc&quot;</span> <span class="attr">value</span>=<span class="string">&quot;abcValue&quot;</span>/&gt;</span></span><br><span class="line">保存之后:$&#123;sessionScope.abc&#125;<span class="tag">&lt;<span class="name">br</span>/&gt;</span></span><br><span class="line">&lt;%--&lt;c:if/&gt;--%&gt;</span><br><span class="line"><span class="tag">&lt;<span class="name">%--if标签用来if判断</span></span></span><br><span class="line"><span class="tag"><span class="attr">test</span>属性表示判断的条件(<span class="attr">EL</span>表达式输出)<span class="attr">--</span>%&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">c:if</span> <span class="attr">test</span>=<span class="string">&quot;$&#123;12==12&#125;&quot;</span>&gt;</span></span><br><span class="line">    12等于12</span><br><span class="line"><span class="tag">&lt;/<span class="name">c:if</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">c:if</span> <span class="attr">test</span>=<span class="string">&quot;$&#123;13!=12&#125;&quot;</span>&gt;</span></span><br><span class="line">    13不等于12</span><br><span class="line"><span class="tag">&lt;/<span class="name">c:if</span>&gt;</span></span><br><span class="line">&lt;%--. &lt;c:choose&gt; &lt;c:when&gt; &lt;c:otherwise&gt;--%&gt;</span><br><span class="line"><span class="tag">&lt;<span class="name">%--choose</span> 标签开始选择判断</span></span><br><span class="line"><span class="tag"><span class="attr">when</span> 标签表示每一种判断情况</span></span><br><span class="line"><span class="tag"><span class="attr">test</span> 属性表示当前这种判断情况的值</span></span><br><span class="line"><span class="tag"><span class="attr">otherwise</span> 标签表示剩下的情况</span></span><br><span class="line">&lt;c:choose&gt; &lt;c:when&gt; &lt;c:otherwise&gt;标签使用时需要注意的点：</span><br><span class="line">1、标签里不能使用 html 注释，要使用 jsp 注释</span><br><span class="line">2、when 标签的父标签一定要是 choose 标签</span><br><span class="line">--%&gt;</span><br><span class="line"><span class="tag">&lt;<span class="name">%</span></span></span><br><span class="line"><span class="tag">    <span class="attr">request.setAttribute</span>(&quot;<span class="attr">height</span>&quot;, <span class="attr">180</span>);</span></span><br><span class="line"><span class="tag">%&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">c:choose</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">%--</span> 这是 <span class="attr">html</span> 注释 <span class="attr">--</span>%&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">c:when</span> <span class="attr">test</span>=<span class="string">&quot;$&#123; requestScope.height &gt; 190 &#125;&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">h2</span>&gt;</span>小巨人<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">c:when</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">c:when</span> <span class="attr">test</span>=<span class="string">&quot;$&#123; requestScope.height &gt; 180 &#125;&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">h2</span>&gt;</span>很高<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">c:when</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">c:when</span> <span class="attr">test</span>=<span class="string">&quot;$&#123; requestScope.height &gt; 170 &#125;&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">h2</span>&gt;</span>还可以<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">c:when</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">c:otherwise</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">c:choose</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">c:when</span> <span class="attr">test</span>=<span class="string">&quot;$&#123;requestScope.height &gt; 160&#125;&quot;</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">h3</span>&gt;</span>大于 160<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">c:when</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">c:when</span> <span class="attr">test</span>=<span class="string">&quot;$&#123;requestScope.height &gt; 150&#125;&quot;</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">h3</span>&gt;</span>大于 150<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">c:when</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">c:when</span> <span class="attr">test</span>=<span class="string">&quot;$&#123;requestScope.height &gt; 140&#125;&quot;</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">h3</span>&gt;</span>大于 140<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">c:when</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">c:otherwise</span>&gt;</span></span><br><span class="line">                其他小于 140</span><br><span class="line">            <span class="tag">&lt;/<span class="name">c:otherwise</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">c:choose</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">c:otherwise</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">c:choose</span>&gt;</span></span><br><span class="line">&lt;%--&lt;c:forEach /&gt;标签--%&gt;</span><br><span class="line"><span class="tag">&lt;<span class="name">%--作用:遍历输出使用--%</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">%--</span></span></span><br><span class="line"><span class="tag"><span class="attr">1.</span>遍历 <span class="attr">1</span> 到 <span class="attr">10</span>，输出</span></span><br><span class="line"><span class="tag"><span class="attr">begin</span> 属性设置开始的索引</span></span><br><span class="line"><span class="tag"><span class="attr">end</span> 属性设置结束的索引</span></span><br><span class="line"><span class="tag"><span class="attr">var</span> 属性表示循环的变量(也是当前正在遍历到的数据)</span></span><br><span class="line">for (int i = 1; i &lt; 10; i++)</span><br><span class="line">--%&gt;</span><br><span class="line"><span class="tag">&lt;<span class="name">table</span> <span class="attr">border</span>=<span class="string">&quot;1&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">c:forEach</span> <span class="attr">begin</span>=<span class="string">&quot;1&quot;</span> <span class="attr">end</span>=<span class="string">&quot;10&quot;</span> <span class="attr">var</span>=<span class="string">&quot;i&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">td</span>&gt;</span>第$&#123;i&#125;行<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">c:forEach</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">table</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">%--</span> <span class="attr">2.</span>遍历 <span class="attr">Object</span> 数组</span></span><br><span class="line"><span class="tag"><span class="attr">for</span> (<span class="attr">Object</span> <span class="attr">item:</span> <span class="attr">arr</span>)</span></span><br><span class="line"><span class="tag"><span class="attr">items</span> 表示遍历的数据源（遍历的集合）</span></span><br><span class="line"><span class="tag"><span class="attr">var</span> 表示当前遍历到的数据</span></span><br><span class="line"><span class="tag"><span class="attr">--</span>%&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">%</span></span></span><br><span class="line"><span class="tag">    <span class="attr">request.setAttribute</span>(&quot;<span class="attr">arr</span>&quot;, <span class="attr">new</span> <span class="attr">String</span>[]&#123;&quot;<span class="attr">18610541354</span>&quot;,&quot;<span class="attr">18688886666</span>&quot;,&quot;<span class="attr">18699998888</span>&quot;&#125;);</span></span><br><span class="line"><span class="tag">%&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">c:forEach</span> <span class="attr">items</span>=<span class="string">&quot;$&#123; requestScope.arr &#125;&quot;</span> <span class="attr">var</span>=<span class="string">&quot;item&quot;</span>&gt;</span></span><br><span class="line">    $&#123; item &#125; <span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">c:forEach</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">%--遍历Map集合--%</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">%</span></span></span><br><span class="line">    Map&lt;String,Object&gt; map = new HashMap&lt;String, Object&gt;();</span><br><span class="line">    map.put(&quot;key1&quot;, &quot;value1&quot;);</span><br><span class="line">    map.put(&quot;key2&quot;, &quot;value2&quot;);</span><br><span class="line">    map.put(&quot;key3&quot;, &quot;value3&quot;);</span><br><span class="line">// for ( Map.Entry<span class="tag">&lt;<span class="name">String,Object</span>&gt;</span> entry : map.entrySet()) &#123;</span><br><span class="line">// &#125;</span><br><span class="line">    request.setAttribute(&quot;map&quot;, map);</span><br><span class="line">%&gt;</span><br><span class="line"><span class="tag">&lt;<span class="name">c:forEach</span> <span class="attr">items</span>=<span class="string">&quot;$&#123; requestScope.map &#125;&quot;</span> <span class="attr">var</span>=<span class="string">&quot;entry&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>$&#123;entry.key&#125; = $&#123;entry.value&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">c:forEach</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">%--遍历</span> <span class="attr">List</span> 集合<span class="attr">---list</span> 中存放 <span class="attr">Student</span> 类，有属性：编号，用户名，密码，年龄，<span class="attr">--</span>%&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">%--电话信息--%</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">%</span></span></span><br><span class="line">    List&lt;Student&gt; studentList = new ArrayList&lt;Student&gt;();</span><br><span class="line">    for (int i = 1; i <span class="tag">&lt;<span class="name">=</span> <span class="attr">10</span>; <span class="attr">i</span>++) &#123;</span></span><br><span class="line"><span class="tag">        <span class="attr">studentList.add</span>(<span class="attr">new</span> <span class="attr">Student</span>(<span class="attr">i</span>,&quot;<span class="attr">username</span>&quot;+<span class="attr">i</span> ,&quot;<span class="attr">pass</span>&quot;+<span class="attr">i</span>,<span class="attr">18</span>+<span class="attr">i</span>,&quot;<span class="attr">phone</span>&quot;+<span class="attr">i</span>));</span></span><br><span class="line"><span class="tag">    &#125;</span></span><br><span class="line"><span class="tag">    <span class="attr">request.setAttribute</span>(&quot;<span class="attr">stus</span>&quot;, <span class="attr">studentList</span>);</span></span><br><span class="line"><span class="tag">%&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">table</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">th</span>&gt;</span>编号<span class="tag">&lt;/<span class="name">th</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">th</span>&gt;</span>用户名<span class="tag">&lt;/<span class="name">th</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">th</span>&gt;</span>密码<span class="tag">&lt;/<span class="name">th</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">th</span>&gt;</span>年龄<span class="tag">&lt;/<span class="name">th</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">th</span>&gt;</span>电话<span class="tag">&lt;/<span class="name">th</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">th</span>&gt;</span>操作<span class="tag">&lt;/<span class="name">th</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">%--</span>    <span class="attr">items</span> 表示遍历的集合<span class="attr">--</span>%&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">%--</span>    <span class="attr">var</span> 表示遍历到的数据<span class="attr">--</span>%&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">%--</span>    <span class="attr">begin</span> 表示遍历的开始索引值<span class="attr">--</span>%&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">%--</span>    <span class="attr">end</span> 表示结束的索引值<span class="attr">--</span>%&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">%--</span>    <span class="attr">step</span> 属性表示遍历的步长值<span class="attr">--</span>%&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">%--</span>    <span class="attr">varStatus</span> 属性表示当前遍历到的数据的状态<span class="attr">--</span>%&gt;</span></span><br><span class="line">&lt;%--    for（int i = 1; i &lt; 10; i+=2）--%&gt;</span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">c:forEach</span> <span class="attr">begin</span>=<span class="string">&quot;2&quot;</span> <span class="attr">end</span>=<span class="string">&quot;7&quot;</span> <span class="attr">step</span>=<span class="string">&quot;2&quot;</span> <span class="attr">varStatus</span>=<span class="string">&quot;status&quot;</span> <span class="attr">items</span>=<span class="string">&quot;$&#123;requestScope.stus&#125;&quot;</span> <span class="attr">var</span>=<span class="string">&quot;stu&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">td</span>&gt;</span>$&#123;stu.id&#125;<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">td</span>&gt;</span>$&#123;stu.username&#125;<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">td</span>&gt;</span>$&#123;stu.password&#125;<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">td</span>&gt;</span>$&#123;stu.age&#125;<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">td</span>&gt;</span>$&#123;stu.phone&#125;<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">td</span>&gt;</span>$&#123;status.step&#125;<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">c:forEach</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">table</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure> 
+      <!-- reward -->
+      
+      <div id="reword-out">
+        <div id="reward-btn">
+          Donate
+        </div>
+      </div>
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <div class="declare">
+      <ul class="post-copyright">
+        <li>
+          <i class="ri-copyright-line"></i>
+          <strong>Copyright： </strong>
+          
+          Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source.
+          
+        </li>
+      </ul>
+    </div>
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://yoursite.com/2020/11/21/javaweb%E4%B9%8BEL%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%92%8CJSTL%E6%A0%87%E7%AD%BE%E5%BA%93/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/2020/11/21/javaweb%E4%B9%8BCookie-Session/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            javaweb之Cookie&amp;Session
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2020/11/19/javaweb%E4%B9%8Bjsp/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">javaweb之jsp</div>
+      </a>
+    
+  </nav>
+
+   
+<!-- valine评论 -->
+<div id="vcomments-box">
+  <div id="vcomments"></div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js"></script>
+<script>
+  new Valine({
+    el: "#vcomments",
+    app_id: "",
+    app_key: "",
+    path: window.location.pathname,
+    avatar: "monsterid",
+    placeholder: "给我的文章加点评论吧~",
+    recordIP: true,
+  });
+  const infoEle = document.querySelector("#vcomments .info");
+  if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+    infoEle.childNodes.forEach(function (item) {
+      item.parentNode.removeChild(item);
+    });
+  }
+</script>
+<style>
+  #vcomments-box {
+    padding: 5px 30px;
+  }
+
+  @media screen and (max-width: 800px) {
+    #vcomments-box {
+      padding: 5px 0px;
+    }
+  }
+
+  #vcomments-box #vcomments {
+    background-color: #fff;
+  }
+
+  .v .vlist .vcard .vh {
+    padding-right: 20px;
+  }
+
+  .v .vlist .vcard {
+    padding-left: 10px;
+  }
+</style>
+
+ 
+     
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2015-2020
+        <i class="ri-heart-fill heart_icon"></i> John Doe
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        
+        Powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+        <span class="division">|</span>
+        Theme - <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>Visitors:<span id="busuanzi_value_site_uv"></span></s>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>Views:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="float_btns">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+      </div>
+    </main>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="Hexo"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags/%E6%97%85%E8%A1%8C/">旅行</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" target="_blank" rel="noopener" href="http://shenyu-vip.lofter.com">摄影</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/friends">友链</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/2019/about">关于我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="Search">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <script>
+      if (window.matchMedia("(max-width: 768px)").matches) {
+        document.querySelector('.content').classList.remove('on');
+        document.querySelector('.sidebar').classList.remove('on');
+      }
+    </script>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto'
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+
+
+<link rel="stylesheet" href="/css/clipboard.css">
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+
+
+<!-- CanvasBackground -->
+
+
+    
+  </div>
+</body>
+
+</html>
