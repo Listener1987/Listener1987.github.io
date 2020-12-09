@@ -144,6 +144,180 @@
     
     
     <article
+  id="post-java常见基本概念总结"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/12/07/java%E5%B8%B8%E8%A7%81%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%E6%80%BB%E7%BB%93/"
+    >java常见基本概念总结</a> 
+</h2>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2020/12/07/java%E5%B8%B8%E8%A7%81%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%E6%80%BB%E7%BB%93/" class="article-date">
+  <time datetime="2020-12-07T02:45:42.000Z" itemprop="datePublished">2020-12-07</time>
+</a>    
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h2 id="静态变量和静态方法"><a href="#静态变量和静态方法" class="headerlink" title="静态变量和静态方法"></a>静态变量和静态方法</h2><h3 id="静态变量-使用static修饰-："><a href="#静态变量-使用static修饰-：" class="headerlink" title="静态变量(使用static修饰)："></a>静态变量(使用static修饰)：</h3><ul>
+<li>运行时,java虚拟机只为静态变量分配一次内存，在加载类的过程中完成静态变量的内存分配。</li>
+<li>在类的内部，可以在任何方法内直接访问静态变量</li>
+<li>在其他类中，可以通过类名访问该类中的静态变量</li>
+<li>静态变量是被多个实例所共享的。</li>
+</ul>
+<h3 id="静态变量的作用："><a href="#静态变量的作用：" class="headerlink" title="静态变量的作用："></a>静态变量的作用：</h3><ul>
+<li>静态变量可以被类的所有实例共享，因此静态变量可以作为实例之间的共享数据，增加实例之间的交互性。</li>
+<li>如果所有类的实例都包含一个相同的常量属性，则可以把这个属性定义为静态常量类型，从而节省内存空间。</li>
+</ul>
+<h3 id="静态方法-使用static修饰-："><a href="#静态方法-使用static修饰-：" class="headerlink" title="静态方法(使用static修饰)："></a>静态方法(使用static修饰)：</h3><ul>
+<li>静态方法不需要通过它所属的任何实例就可以被调用，因此静态方法中不能使用this关键字也不能使用super关键字，也不能直接访问所属类的任何实例变量和实例方法，但可以直接访问所属类的静态变量和静态方法。</li>
+<li>在实例方法中，可以直接访问所属类的静态变量，静态方法，实例变量，实例方法。</li>
+<li>在访问非静态方法时，需要通过实例对象来访问，而在访问静态方法时，可以直接访问，也可以通过类名来访问，还可以通过实例化对象访问。</li>
+</ul>
+<h3 id="静态代码块-使用static-修饰-："><a href="#静态代码块-使用static-修饰-：" class="headerlink" title="静态代码块(使用static{}修饰)："></a>静态代码块(使用static{}修饰)：</h3><ul>
+<li>类似于一个方法，但不能存在于任何方法体内。</li>
+<li>可以置于类中的任何地方，类中可以有多个静态初始化块</li>
+<li>java虚拟机在加载类时执行静态代码块，所以将一些只执行一次的初始化操作都放在static中</li>
+<li>如果类中包含多个代码块，则根据出现的顺序，依次执行，每个静态方法只执行一次。</li>
+<li>静态代码块和静态方法一样，不能直接访问类的实例变量和实例方法，而需要通过类的实例对象来访问。</li>
+</ul>
+<h3 id="静态代码块的作用："><a href="#静态代码块的作用：" class="headerlink" title="静态代码块的作用："></a>静态代码块的作用：</h3><p>主要用于初始化类，为类的静态变量赋初始值，提升程序性能。</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+    
+ 
+   
+</article>
+
+    
+    <article
+  id="post-java基础之jdbc"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/11/25/java%E5%9F%BA%E7%A1%80%E4%B9%8Bjdbc/"
+    >java基础之jdbc</a> 
+</h2>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2020/11/25/java%E5%9F%BA%E7%A1%80%E4%B9%8Bjdbc/" class="article-date">
+  <time datetime="2020-11-25T11:45:58.000Z" itemprop="datePublished">2020-11-25</time>
+</a>    
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>目录:</p>
+<ul>
+<li>jdbc的概念</li>
+<li>数据库的连接方式</li>
+<li>使用PreparedStatement实现CROD操作</li>
+<li>ResultSet和ResultSetMetaData</li>
+<li>操作BLOB类型字段</li>
+<li>批量插入</li>
+<li>数据库事务</li>
+<li>数据库连接池</li></ul> 
+      <a class="article-more-link" href="/2020/11/25/java%E5%9F%BA%E7%A1%80%E4%B9%8Bjdbc/"
+        >阅读更多...</a
+      >
+       
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+    
+ 
+   
+</article>
+
+    
+    <article
+  id="post-SGG书城项目"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/11/23/SGG%E4%B9%A6%E5%9F%8E%E9%A1%B9%E7%9B%AE/"
+    >SGG书城项目</a> 
+</h2>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2020/11/23/SGG%E4%B9%A6%E5%9F%8E%E9%A1%B9%E7%9B%AE/" class="article-date">
+  <time datetime="2020-11-23T14:36:55.000Z" itemprop="datePublished">2020-11-23</time>
+</a>    
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+   
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+    
+ 
+   
+</article>
+
+    
+    <article
   id="post-javaweb之Json-Ajax-i18n"
   class="article article-type-post"
   itemscope
@@ -532,159 +706,13 @@
 </article>
 
     
-    <article
-  id="post-java反射"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2020/11/01/java%E5%8F%8D%E5%B0%84/"
-    >java反射</a> 
-</h2>
- 
-
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2020/11/01/java%E5%8F%8D%E5%B0%84/" class="article-date">
-  <time datetime="2020-11-01T07:25:44.000Z" itemprop="datePublished">2020-11-01</time>
-</a>    
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <p>目录：<br>    * 关于java.lang.Class类的理解<br>    * 获取Class实例的方法和作用范围<br>    * 加载器的使用<br>    * 获取运行时类中指定的结构<br>    * 调用运行时类中指定的结构：属性、方法、构造器<br>    * 动态代理</p> 
-      <a class="article-more-link" href="/2020/11/01/java%E5%8F%8D%E5%B0%84/"
-        >阅读更多...</a
-      >
-       
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-    </footer>
-  </div>
-
-    
- 
-   
-</article>
-
-    
-    <article
-  id="post-javaIO流"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2020/10/25/javaIO%E6%B5%81/"
-    >javaIO流</a> 
-</h2>
- 
-
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2020/10/25/javaIO%E6%B5%81/" class="article-date">
-  <time datetime="2020-10-25T07:38:18.000Z" itemprop="datePublished">2020-10-25</time>
-</a>    
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <p>目录：<br>    * File类的使用<br>    * 流的操作<br>    * 缓冲流的使用<br>    * 转换流的使用—字符流<br>    * 其他类的使用</p> 
-      <a class="article-more-link" href="/2020/10/25/javaIO%E6%B5%81/"
-        >阅读更多...</a
-      >
-       
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-    </footer>
-  </div>
-
-    
- 
-   
-</article>
-
-    
-    <article
-  id="post-java集合"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2020/10/18/java%E9%9B%86%E5%90%88/"
-    >java集合</a> 
-</h2>
- 
-
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2020/10/18/java%E9%9B%86%E5%90%88/" class="article-date">
-  <time datetime="2020-10-18T03:00:26.000Z" itemprop="datePublished">2020-10-18</time>
-</a>    
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-   
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-    </footer>
-  </div>
-
-    
- 
-   
-</article>
-
-    
   </article>
   
 
   
   <nav class="page-nav">
     
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">下一页</a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">下一页</a>
   </nav>
   
 </section>
